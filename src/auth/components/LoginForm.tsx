@@ -20,52 +20,101 @@ import { AnimateButton, FirebaseSocial } from '.';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useAuthStore } from '../hooks/useAuthStore';
+import { IUserLogin } from '../interfaces';
 
 export const LoginForm = () => {
   const [checked, setChecked] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { startLogin } = useAuthStore();
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors,
+      isValid,
+      isSubmitting,
+      touchedFields,
+    },
+  } = useForm<IUserLogin>();
+
+  // Methods
+  const onSubmit: SubmitHandler<IUserLogin> = (data)=>{
+    if(!isValid)
+      return;
+      startLogin({user: data, rememberUser: checked});
+  }
+
   return (
-    <form noValidate>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Stack spacing={1}>
             <InputLabel htmlFor="email-login">Email Address</InputLabel>
-            <OutlinedInput id="email-login" type="email" name="email" placeholder="Enter email address" fullWidth error={Boolean(false)} />
-            <FormHelperText error id="standard-weight-helper-text-email-login">
-              Error
-            </FormHelperText>
+            <OutlinedInput id="email-login"
+              type="email"
+              placeholder="Enter email address"
+              fullWidth
+              error={Boolean(false)}
+              { ...register('email', {
+                required: 'You most set a email format.',
+                pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'Please enter a valid email',
+              } }) }/>
+              {
+                touchedFields.email &&
+                errors.email &&
+                <FormHelperText error
+                  id="standard-weight-helper-text-email-login">
+                    {
+                      errors.email.message
+                    }
+                </FormHelperText>
+              }
           </Stack>
         </Grid>
         <Grid item xs={12}>
           <Stack spacing={1}>
-            <InputLabel htmlFor="password-login">Password</InputLabel>
+            <InputLabel htmlFor="password-login">
+              Password
+            </InputLabel>
             <OutlinedInput
               fullWidth
               error={Boolean(false)}
-              id="-password-login"
-              type={'password'}
-              name="password"
+              id="password-login"
+              type={ showPassword ? 'text' : 'password' }
+              {...register('password', {
+                required: 'Please set a password.'
+              })}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={() => {
-                      console.log('Hola');
+                      setShowPassword(!showPassword);
                     }}
-                    onMouseDown={() => {
-                      console.log('Hola');
+                    onMouseDown={(event) => {
+                      event.preventDefault();
                     }}
                     edge="end"
                     size="large"
                   >
-                    {checked ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                  {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                   </IconButton>
                 </InputAdornment>
               }
               placeholder="Enter password"
             />
-            <FormHelperText error id="standard-weight-helper-text-password-login">
-              Password
-            </FormHelperText>
+            {
+              touchedFields.password && errors.password &&
+              <FormHelperText
+                error
+                id="standard-weight-helper-text-password-login">
+                { errors.password.message }
+              </FormHelperText>
+            }
           </Stack>
         </Grid>
 
@@ -83,19 +132,28 @@ export const LoginForm = () => {
               }
               label={<Typography variant="h6">Keep me sign in</Typography>}
             />
-            <Link variant="h6" component={RouterLink} to="" color="text.primary">
+            <Link variant="h6"
+              component={RouterLink}
+              to=""
+              color="text.primary">
               Forgot Password?
             </Link>
           </Stack>
         </Grid>
-        {checked && (
+        {
           <Grid item xs={12}>
             <FormHelperText error>Error</FormHelperText>
           </Grid>
-        )}
+        }
         <Grid item xs={12}>
           <AnimateButton>
-            <Button disableElevation disabled={checked} fullWidth size="large" type="submit" variant="contained" color="primary">
+            <Button disableElevation
+              disabled={isSubmitting}
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              color="primary">
               Login
             </Button>
           </AnimateButton>

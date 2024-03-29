@@ -1,17 +1,19 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Login } from './auth/pages/Login';
+import { BrowserRouter } from 'react-router-dom';
 import ThemeCustomization from './themes';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import { RoutesApp } from './routes/RoutesApp';
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <ThemeCustomization>
-          <Routes>
-            <Route path="/" element={ <Login/> }/>
-          </Routes>
-        </ThemeCustomization>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ThemeCustomization>
+            <RoutesApp/>
+          </ThemeCustomization>
+        </BrowserRouter>
+      </Provider>
     </>
   )
 }

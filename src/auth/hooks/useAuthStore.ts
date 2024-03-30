@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onChecking, onLogin, onLogout } from "../store";
-import { IStartLoginProps, IUser } from "../interfaces";
+import { IStartLoginProps, IUser, IErrorResponse } from "../interfaces";
 import Api from "../../api/Api";
 import { AppDispatch, RootState } from "../../store/store";
 import { jwtDecode } from "jwt-decode";
+import { AxiosError } from "axios";
 
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
-export const useAppSelector = useSelector.withTypes<RootState>()
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
 
 export const useAuthStore = () => {
   // Atributtes
   const dispatch = useAppDispatch();
-  const { status } = useAppSelector((state) => state.auth);
+  const { status, msg } = useAppSelector((state) => state.auth);
 
   // Methods
   const startLogin = async({ user, rememberUser }: IStartLoginProps)=>{
@@ -29,37 +30,40 @@ export const useAuthStore = () => {
         })
       );
     }catch(e){
-      dispatch(onLogout());
+      const error = e as AxiosError<IErrorResponse>;
+      const errorResponse = error.response?.data;
+      dispatch(onLogout(errorResponse?.msg));
     }
   };
 
   const startCheckingAuth = ()=>{
     const token = localStorage.getItem('token') || '';
-    console.log({token});
     if(token === ''){
-      console.log('Entro al logout')
-      dispatch(onLogout());
+      dispatch(onLogout(null));
       return;
     }
     const user = jwtDecode<IUser>(token);
     dispatch(onLogin(user));
-  }
+  };
 
   const startCheckingRememberUser = ()=>{
     const rememberUser = localStorage.getItem('rememberUser') || false;
     if(!rememberUser){
       localStorage.clear();
     }
-  }
+  };
+
   const startLogout= ()=> {
-    dispatch(onLogout());
+    dispatch(onLogout(null));
     localStorage.clear();
-  }
+  };
+
   return {
     status,
+    msg,
     startLogin,
     startCheckingAuth,
     startCheckingRememberUser,
     startLogout
-  }
+  };
 };

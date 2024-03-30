@@ -4,6 +4,7 @@ import { IInitialState, IUser } from "../interfaces";
 const initialState: IInitialState = {
   user: null,
   status: 'not-authenticated', //authenticated - not-authenticated
+  msg: null,
 };
 
 export const authSlice = createSlice({
@@ -11,15 +12,16 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     onChecking: ( state)=>{
-      state.status = 'cheking';
+      state.status = 'checking';
     },
     onLogin: (state, { payload }: { payload: IUser })=>{
       state.user = payload;
       state.status = 'authenticated';
     },
-    onLogout: (state)=>{
+    onLogout: (state, { payload })=>{
       state.user = null;
       state.status = 'not-authenticated';
+      state.msg = payload;
     }
   }
 });

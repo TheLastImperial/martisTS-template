@@ -6,6 +6,7 @@ export interface IUserLogin {
 export interface IAuthSlice<U> {
   status: string;
   user: U | null;
+  msg: string | null;
 };
 
 export interface IUser {
@@ -21,4 +22,9 @@ export interface IInitialState extends IAuthSlice<IUser> {
 export interface IStartLoginProps {
   user: IUserLogin,
   rememberUser: boolean,
+};
+
+export interface IErrorResponse {
+  ok: boolean,
+  msg: string;
 };

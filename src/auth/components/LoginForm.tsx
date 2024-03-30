@@ -27,7 +27,7 @@ import { IUserLogin } from '../interfaces';
 export const LoginForm = () => {
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const { startLogin } = useAuthStore();
+  const { msg, startLogin } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -140,9 +140,9 @@ export const LoginForm = () => {
             </Link>
           </Stack>
         </Grid>
-        {
+        { msg &&
           <Grid item xs={12}>
-            <FormHelperText error>Error</FormHelperText>
+            <FormHelperText error>{ msg }</FormHelperText>
           </Grid>
         }
         <Grid item xs={12}>

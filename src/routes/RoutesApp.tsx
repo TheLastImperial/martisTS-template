@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { Index } from "../home/pages/Index"
 import { useAuthStore } from "../auth/hooks/useAuthStore";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { useEffect } from "react";
+import SamplePage from "../pages/SamplePage";
 
 export const RoutesApp = ()=>{
   const { status,
@@ -34,7 +34,7 @@ export const RoutesApp = ()=>{
           </>
         ) : (
           <>
-            <Route path="/" element={ <Index/> }/>
+            <Route path="/" element={ <SamplePage/> }/>
             <Route path="/*" element={ <Navigate to="/"/> }/>
           </>
         )

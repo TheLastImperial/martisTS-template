@@ -3,18 +3,21 @@ import { Box, Typography } from '@mui/material';
 
 // project import
 import NavGroup from './NavGroup';
-import menuItem from 'menu-items';
-
-// ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //
+import menuItems from '../../../../../menu-items';
 
 const Navigation = () => {
-  const navGroups = menuItem.items.map((item) => {
+
+  const navGroups = menuItems.items.map((item) => {
     switch (item.type) {
       case 'group':
         return <NavGroup key={item.id} item={item} />;
       default:
         return (
-          <Typography key={item.id} variant="h6" color="error" align="center">
+          <Typography
+            key={item.id}
+            variant="h6"
+            color="error"
+            align="center">
             Fix - Navigation Group
           </Typography>
         );

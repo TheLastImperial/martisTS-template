@@ -9,7 +9,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography
+  Typography,
 } from '@mui/material';
 
 // project import
@@ -21,13 +21,19 @@ export interface NavItemProps {
   level: number;
 };
 
+interface ListItemProps {
+  component: React.ElementType,
+  href?: string,
+  target?: string
+};
+
 const NavItem = ({ item, level }: NavItemProps) => {
   const theme = useTheme();
   const { pathname } = useLocation();
   const {
     drawerOpen,
     openItem,
-    startActiveItem
+    startActiveItem,
   } = useUIStore();
 
   let itemTarget = '_self';
@@ -35,15 +41,21 @@ const NavItem = ({ item, level }: NavItemProps) => {
     itemTarget = '_blank';
   }
 
-  let listItemProps = {
-    component: forwardRef<HTMLLinkElement>((props, ref) =>
+
+  let listItemProps : ListItemProps = {
+    component: forwardRef<HTMLAnchorElement>((props, ref) =>
       <Link ref={ref}
       {...props}
       to={item.url}
       target={itemTarget} />)
   };
+
   if (item?.external) {
-    listItemProps = { component: 'a', href: item.url, target: itemTarget };
+    listItemProps = {
+      component: 'a',
+      href: item.url,
+      target: itemTarget
+    };
   }
 
   const itemHandler = (id: string) => {

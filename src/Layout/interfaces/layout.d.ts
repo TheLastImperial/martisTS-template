@@ -5,7 +5,7 @@ export interface Item {
   title: string;
   type: string;
   url: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   breadcrumbs?: boolean;
   external?: boolean,
   target?: boolean;
@@ -13,6 +13,10 @@ export interface Item {
 }
 
 export interface ItemWithChildren extends Item {
-  children: Item[];
-  chip: ChipOwnProps;
+  children?: Item[];
+  chip?: ChipOwnProps;
 }
+
+export interface Navigation {
+  items: ItemWithChildren[]
+};

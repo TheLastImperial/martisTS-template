@@ -31,8 +31,8 @@ interface MainCardProps {
   sx?: SxProps,
   title?: (string | ReactNode),
   codeHighlight?: boolean,
-  border: boolean,
-  content: boolean,
+  border?: boolean,
+  content?: boolean,
   children: ReactNode
 }
 

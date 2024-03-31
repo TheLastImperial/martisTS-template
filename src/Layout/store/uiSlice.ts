@@ -27,8 +27,8 @@ export const uiSlice = createSlice({
       state.drawerOpen = action.payload.drawerOpen;
     },
 
-    openComponentDrawer(state, action) {
-      state.componentDrawerOpen = action.payload.componentDrawerOpen;
+    openComponentDrawer(state, { payload }) {
+      state.componentDrawerOpen = payload;
     }
   }
 });

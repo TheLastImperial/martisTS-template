@@ -41,7 +41,7 @@ interface SimpleBarScroll {
   sx: SxProps
 };
 
-export default function SimpleBarScroll({
+export function SimpleBarScroll({
   children,
   sx,
   ...other

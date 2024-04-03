@@ -8,12 +8,12 @@ import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import Drawer from './Drawer';
 import Header from './Header';
 import navigation from '../../menu-items';
-// import Breadcrumbs from 'components/@extended/Breadcrumbs';
 
 // types
 import { useUIStore } from '../hooks/useUIStore';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { Navigation } from '../interfaces';
+// @ts-ignore
+import { Breadcrumbs } from 'components';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   const theme = useTheme();

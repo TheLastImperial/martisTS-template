@@ -27,7 +27,8 @@ import {
   MessageOutlined,
   SettingOutlined
 } from '@ant-design/icons';
-import { MainCard, Transitions } from '../../../components';
+// @ts-ignore
+import { MainCard, Transitions } from 'components';
 
 // sx styles
 const avatarSX = {

@@ -2,9 +2,9 @@
 import { Button, CardMedia, Link, Stack, Typography } from '@mui/material';
 
 // assets
-import avatar from '../../../../assets/avatar-group.png';
-import { AnimateButton } from '../../../components';
-import { MainCard } from '../../../components';
+import avatar from 'assets/avatar-1.png';
+// @ts-ignore
+import { AnimateButton, MainCard } from 'components';
 
 const NavCard = () => (
   <MainCard sx={{ bgcolor: 'grey.50', m: 3 }}>

@@ -5,14 +5,18 @@ import { Link, useLocation } from 'react-router-dom';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import { Grid, Typography } from '@mui/material';
 import { MainCard } from '.';
-import { Item, ItemWithChildren, Navigation } from '../interfaces';
+import { Item, ItemWithChildren, Navigation } from '../Layout/interfaces';
 
 interface BreadcrumbsProps{
   navigation: Navigation;
   title: boolean;
 };
 
-const Breadcrumbs = ({ navigation, title, ...others }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({
+  navigation,
+  title,
+  ...others }: BreadcrumbsProps
+) => {
   const location = useLocation();
   const [main, setMain] = useState<Item>();
   const [item, setItem] = useState<Item>();
@@ -112,5 +116,3 @@ const Breadcrumbs = ({ navigation, title, ...others }: BreadcrumbsProps) => {
 
   return breadcrumbContent;
 };
-
-export default Breadcrumbs;

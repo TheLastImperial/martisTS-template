@@ -1,10 +1,11 @@
 // project import
 import NavCard from './NavCard';
 import Navigation from './Navigation';
-import SimpleBar from '../../../components/SimpleBar';
+// @ts-ignore
+import { SimpleBarScroll } from 'components';
 
 const DrawerContent = () => (
-  <SimpleBar
+  <SimpleBarScroll
     sx={{
       '& .simplebar-content': {
         display: 'flex',
@@ -14,7 +15,7 @@ const DrawerContent = () => (
   >
     <Navigation />
     <NavCard />
-  </SimpleBar>
+  </SimpleBarScroll>
 );
 
 export default DrawerContent;

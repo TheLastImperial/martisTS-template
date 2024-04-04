@@ -5,10 +5,10 @@ import { Link, useLocation } from 'react-router-dom';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import { Grid, Typography } from '@mui/material';
 import { MainCard } from '.';
-import { Item, ItemWithChildren, Navigation } from '../Layout/interfaces';
+import { Menu, MenuItem } from 'src/ui/interfaces';
 
 interface BreadcrumbsProps{
-  navigation: Navigation;
+  navigation: Menu[];
   title: boolean;
 };
 
@@ -18,11 +18,11 @@ export const Breadcrumbs = ({
   ...others }: BreadcrumbsProps
 ) => {
   const location = useLocation();
-  const [main, setMain] = useState<Item>();
-  const [item, setItem] = useState<Item>();
+  const [main, setMain] = useState<Menu>();
+  const [menuItem, setMenuItem] = useState<MenuItem>();
 
   // set active item state
-  const getCollapse = (menu: ItemWithChildren) => {
+  const getCollapse = (menu: Menu) => {
     if (menu.children) {
       menu.children.filter((collapse) => {
         if (collapse.type && collapse.type === 'collapse') {
@@ -30,7 +30,7 @@ export const Breadcrumbs = ({
         } else if (collapse.type && collapse.type === 'item') {
           if (location.pathname === collapse.url) {
             setMain(menu);
-            setItem(collapse);
+            setMenuItem(collapse);
           }
         }
         return false;
@@ -39,8 +39,8 @@ export const Breadcrumbs = ({
   };
 
   useEffect(() => {
-    navigation?.items?.map((menu) => {
-      if (menu.type && menu.type === 'group') {
+    navigation.map((menu) => {
+      if (menu.type === 'group') {
         getCollapse(menu);
       }
       return false;
@@ -71,8 +71,8 @@ export const Breadcrumbs = ({
   }
 
   // items
-  if (item && item.type === 'item') {
-    itemTitle = item.title;
+  if (menuItem && menuItem.type === 'item') {
+    itemTitle = menuItem.title;
     itemContent = (
       <Typography variant="subtitle1" color="textPrimary">
         {itemTitle}
@@ -80,7 +80,7 @@ export const Breadcrumbs = ({
     );
 
     // main
-    if (item.breadcrumbs !== false) {
+    if (menuItem.breadcrumbs !== false) {
       breadcrumbContent = (
         <MainCard border={false}
           sx={{ mb: 3, bgcolor: 'transparent' }}
@@ -105,7 +105,7 @@ export const Breadcrumbs = ({
             </Grid>
             {title && (
               <Grid item sx={{ mt: 2 }}>
-                <Typography variant="h5">{item.title}</Typography>
+                <Typography variant="h5">{menuItem.title}</Typography>
               </Grid>
             )}
           </Grid>

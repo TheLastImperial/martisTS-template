@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 
 // third-party
 import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { ReactNode } from 'react';
 

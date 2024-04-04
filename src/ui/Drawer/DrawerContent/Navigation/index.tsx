@@ -3,11 +3,11 @@ import { Box, Typography } from '@mui/material';
 
 // project import
 import NavGroup from './NavGroup';
-import menuItems from 'src/menu-items';
+import { useUIStore } from 'src/ui/hooks/useUIStore';
 
 const Navigation = () => {
-
-  const navGroups = menuItems.items.map((item) => {
+  const { menu } = useUIStore()
+  const navGroups = menu.map((item) => {
     switch (item.type) {
       case 'group':
         return <NavGroup key={item.id} item={ item } />;

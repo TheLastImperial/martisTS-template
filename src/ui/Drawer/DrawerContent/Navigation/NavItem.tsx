@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { useUIStore } from 'src/ui/hooks/useUIStore';
 import { MenuItem } from 'src/ui/interfaces';
+import { iconHelper } from 'src/ui/helpers/iconHelper';
 
 // project import
 
@@ -61,11 +62,15 @@ const NavItem = ({ item, level }: NavItemProps) => {
   const itemHandler = (id: string) => {
     startActiveItem([id]);
   };
-
-  const Icon = item.icon;
-  const itemIcon = item.icon ? <Icon style={{
-    fontSize: drawerOpen ? '1rem' : '1.25rem'
-  }} /> : false;
+  let itemIcon;
+  if(item.icon){
+    const Icon = iconHelper(item.icon);
+    itemIcon = <Icon style={{
+      fontSize: drawerOpen ? '1rem' : '1.25rem'
+    }} />;
+  }else{
+    itemIcon = false;
+  }
 
   const isSelected = openItem.findIndex((id: string) => id === item.id) > -1;
   // active menu item on page load

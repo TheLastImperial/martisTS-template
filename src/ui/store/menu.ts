@@ -1,7 +1,3 @@
-import {
-  AntDesignOutlined, BarcodeOutlined, BgColorsOutlined, ChromeOutlined,
-  DashboardOutlined, FontSizeOutlined, LoginOutlined, ProfileOutlined,
-  QuestionOutlined } from "@ant-design/icons";
 import { Menu } from "../interfaces";
 
 export const menu: Menu[] = [
@@ -15,7 +11,7 @@ export const menu: Menu[] = [
         title: 'Dashboard',
         type: 'item',
         url: '/dashboard/default',
-        icon: DashboardOutlined,
+        icon: "DashboardOutlined",
         breadcrumbs: false
       }
     ]
@@ -30,7 +26,7 @@ export const menu: Menu[] = [
         title: 'Login',
         type: 'item',
         url: '/login',
-        icon: LoginOutlined,
+        icon: "LoginOutlined",
         target: true
       },
       {
@@ -38,7 +34,7 @@ export const menu: Menu[] = [
         title: 'Register',
         type: 'item',
         url: '/register',
-        icon: ProfileOutlined,
+        icon: "ProfileOutlined",
         target: true
       }
     ]
@@ -53,28 +49,28 @@ export const menu: Menu[] = [
         title: 'Typography',
         type: 'item',
         url: '/typography',
-        icon: FontSizeOutlined
+        icon: "FontSizeOutlined"
       },
       {
         id: 'util-color',
         title: 'Color',
         type: 'item',
         url: '/color',
-        icon: BgColorsOutlined
+        icon: "BgColorsOutlined"
       },
       {
         id: 'util-shadow',
         title: 'Shadow',
         type: 'item',
         url: '/shadow',
-        icon: BarcodeOutlined
+        icon: "BarcodeOutlined"
       },
       {
         id: 'ant-icons',
         title: 'Ant Icons',
         type: 'item',
         url: '/icons/ant',
-        icon: AntDesignOutlined,
+        icon: "AntDesignOutlined",
         breadcrumbs: false
       }
     ]
@@ -89,14 +85,14 @@ export const menu: Menu[] = [
         title: 'Sample Page',
         type: 'item',
         url: '/sample-page',
-        icon: ChromeOutlined
+        icon: "ChromeOutlined"
       },
       {
         id: 'documentation',
         title: 'Documentation',
         type: 'item',
         url: 'https://codedthemes.gitbook.io/mantis/',
-        icon: QuestionOutlined,
+        icon: "QuestionOutlined",
         external: true,
         target: true
       }

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../store'
+import { useAppDispatch, useAppSelector } from 'src/store'
 import { onSetDraweOpen, onSetOpenItem } from '../store';
 
 export const useUIStore = () => {
@@ -9,14 +9,16 @@ export const useUIStore = () => {
     openItem,
     menu,
     notifications,
-  } = useAppSelector((state) => state.ui2);
+  } = useAppSelector((state) => state.ui);
 
   const startActiveItem = (item: string[])=>{
     dispatch(onSetOpenItem(item));
-  }
+  };
+
   const startOpenDrawer = (open: boolean)=>{
     dispatch(onSetDraweOpen(open));
-  }
+  };
+
   return {
     drawerWidth,
     drawerOpen,
@@ -24,6 +26,6 @@ export const useUIStore = () => {
     menu,
     notifications,
     startActiveItem,
-    startOpenDrawer
-  }
+    startOpenDrawer,
+  };
 };

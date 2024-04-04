@@ -3,10 +3,10 @@ import { Box, List, Typography } from '@mui/material';
 // project import
 import NavItem from './NavItem';
 import { useUIStore } from 'src/ui/hooks/useUIStore';
-import { ItemWithChildren } from 'src/ui/interfaces';
+import { Menu } from 'src/ui/interfaces';
 
 interface NavGroupProps {
-  item: ItemWithChildren
+  item: Menu
 };
 
 const NavGroup = ({ item }: NavGroupProps) => {

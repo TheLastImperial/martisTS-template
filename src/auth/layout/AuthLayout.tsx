@@ -1,6 +1,7 @@
 import { Box, Grid } from '@mui/material';
-import { AuthFooter, AuthCard, AuthBackground, Logo } from '../components';
+import { AuthCard, AuthBackground } from '../components';
 import { ReactNode } from 'react';
+import { Logo } from 'src/components';
 
 interface AuthLayoutProps {
   children: ReactNode

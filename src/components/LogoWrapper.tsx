@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ButtonBase, SxProps } from '@mui/material';
 
 // project import
-import { Logo } from '.';
+import { Logo } from '../auth/components';
 
 // ==============================|| MAIN LOGO ||============================== //
 

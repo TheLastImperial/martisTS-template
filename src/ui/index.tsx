@@ -2,12 +2,13 @@ import {
   Box,
   Toolbar,
   useMediaQuery,
-  useTheme } from "@mui/material";
-import { Breadcrumbs } from "src/components";
+  useTheme
+} from "@mui/material";
 import Header from "ui/Header";
 import Drawer from 'ui/Drawer';
 import { useUIStore } from "src/ui/hooks/useUIStore";
 import { ReactNode, useEffect } from "react";
+import { Breadcrumbs } from "./Drawer/DrawerContent/Breadcrumbs";
 
 export const UI = ({ children }: { children: ReactNode })=>{
   const theme = useTheme();

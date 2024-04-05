@@ -2,10 +2,9 @@
 import { Box } from '@mui/material';
 
 // project import
-import { MainCard } from '.';
 import { ReactNode } from 'react';
+import { MainCard } from 'src/components';
 
-// ==============================|| AUTHENTICATION - CARD WRAPPER ||============================== //
 interface AuthCardProps {
   children: ReactNode
 }

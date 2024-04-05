@@ -7,8 +7,6 @@ import Google from '../assets/google.svg';
 import Twitter from '../assets/twitter.svg';
 import Facebook from '../assets/facebook.svg';
 
-// ==============================|| FIREBASE - SOCIAL BUTTON ||============================== //
-
 export const FirebaseSocial = () => {
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
@@ -30,7 +28,11 @@ export const FirebaseSocial = () => {
       direction="row"
       spacing={matchDownSM ? 1 : 2}
       justifyContent={matchDownSM ? 'space-around' : 'space-between'}
-      sx={{ '& .MuiButton-startIcon': { mr: matchDownSM ? 0 : 1, ml: matchDownSM ? 0 : -0.5 } }}
+      sx={{
+        '& .MuiButton-startIcon': {
+          mr: matchDownSM ? 0 : 1, ml: matchDownSM ? 0 : -0.5
+        }
+      }}
     >
       <Button
         variant="outlined"

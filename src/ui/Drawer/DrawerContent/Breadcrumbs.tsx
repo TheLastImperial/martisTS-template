@@ -4,8 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 // material-ui
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import { Grid, Typography } from '@mui/material';
-import { MainCard } from '.';
 import { Menu, MenuItem } from 'src/ui/interfaces';
+import { MainCard } from 'src/components';
 
 interface BreadcrumbsProps{
   navigation: Menu[];

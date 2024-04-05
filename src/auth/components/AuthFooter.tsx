@@ -1,10 +1,17 @@
 // material-ui
-import { useMediaQuery, Container, Link, Typography, Stack, Theme } from '@mui/material';
-
-// ==============================|| FOOTER - AUTHENTICATION ||============================== //
+import {
+  useMediaQuery,
+  Container,
+  Link,
+  Typography,
+  Stack,
+  Theme
+} from '@mui/material';
 
 export const AuthFooter = () => {
-  const matchDownSM = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const matchDownSM = useMediaQuery(
+    (theme: Theme) => theme.breakpoints.down('sm')
+  );
 
   return (
     <Container maxWidth="xl">
@@ -14,14 +21,19 @@ export const AuthFooter = () => {
         spacing={2}
         textAlign={matchDownSM ? 'center' : 'inherit'}
       >
-        <Typography variant="subtitle2" color="secondary" component="span">
+        <Typography variant="subtitle2" color="secondary"
+          component="span">
           &copy; Mantis React Dashboard Template By&nbsp;
-          <Typography component={Link} variant="subtitle2" href="https://codedthemes.com" target="_blank" underline="hover">
+          <Typography component={Link}
+            variant="subtitle2" href="https://codedthemes.com"
+            target="_blank" underline="hover">
             CodedThemes
           </Typography>
         </Typography>
 
-        <Stack direction={matchDownSM ? 'column' : 'row'} spacing={matchDownSM ? 1 : 3} textAlign={matchDownSM ? 'center' : 'inherit'}>
+        <Stack direction={matchDownSM ? 'column' : 'row'}
+          spacing={matchDownSM ? 1 : 3}
+          textAlign={matchDownSM ? 'center' : 'inherit'}>
           <Typography
             variant="subtitle2"
             color="secondary"

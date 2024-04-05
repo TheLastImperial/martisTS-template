@@ -2,7 +2,8 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { useAuthStore } from "../auth/hooks/useAuthStore";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { useEffect } from "react";
-import SamplePage from "../pages/SamplePage";
+// import SamplePage from "../pages/SamplePage";
+import { MyPage } from "src/home/pages/MyPage";
 
 export const RoutesApp = ()=>{
   const { status,
@@ -34,7 +35,7 @@ export const RoutesApp = ()=>{
           </>
         ) : (
           <>
-            <Route path="/" element={ <SamplePage/> }/>
+            <Route path="/" element={ <MyPage/> }/>
             <Route path="/*" element={ <Navigate to="/"/> }/>
           </>
         )

@@ -16,13 +16,14 @@ import {
   Typography
 } from '@mui/material';
 
-import { AnimateButton, FirebaseSocial } from '.';
+import { FirebaseSocial } from '.';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuthStore } from '../hooks/useAuthStore';
 import { IUserLogin } from '../interfaces';
+import { AnimateButton } from 'src/components';
 
 export const LoginForm = () => {
   const [checked, setChecked] = useState(false);

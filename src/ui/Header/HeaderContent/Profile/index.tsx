@@ -31,6 +31,7 @@ import {
 } from '@ant-design/icons';
 // @ts-ignore
 import { MainCard, Transitions } from 'components';
+import { useAuthStore } from 'src/auth';
 
 interface TabPanelProps {
   children: ReactNode;
@@ -59,9 +60,10 @@ function a11yProps(index: number) {
 
 const Profile = () => {
   const theme = useTheme();
+  const { startLogout } = useAuthStore();
 
-  const handleLogout = async () => {
-    // logout
+  const handleLogout = () => {
+    startLogout();
   };
 
   const anchorRef = useRef<HTMLButtonElement>(null);

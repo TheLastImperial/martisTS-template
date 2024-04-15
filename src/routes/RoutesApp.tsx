@@ -3,7 +3,9 @@ import { useAuthStore } from "../auth/hooks/useAuthStore";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { useEffect } from "react";
 // import SamplePage from "../pages/SamplePage";
-import { MyPage } from "src/home/pages/MyPage";
+// import { MyPage } from "src/home/pages/MyPage";
+import { Patients } from "src/patients/page/Patients";
+import { PatientRoutes } from "src/patients/routes/PatientRoute";
 
 export const RoutesApp = ()=>{
   const { status,
@@ -35,7 +37,8 @@ export const RoutesApp = ()=>{
           </>
         ) : (
           <>
-            <Route path="/" element={ <MyPage/> }/>
+            <Route path="/" element = { <Patients/> }/>
+            <Route path="/patient/*" element = { <PatientRoutes /> }/>
             <Route path="/*" element={ <Navigate to="/"/> }/>
           </>
         )

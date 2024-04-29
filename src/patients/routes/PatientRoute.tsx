@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom"
 import { ReactNode, useMemo } from "react"
 import { Patients, NewPatient } from "../page";
+import { ShowPatient } from "../page/ShowPatient";
+import { EditPatient } from "../page/EditPatient";
 
 export const PatientRoutes = (): ReactNode =>{
   const { pathname } = useLocation();
@@ -18,6 +20,8 @@ export const PatientRoutes = (): ReactNode =>{
       <Routes>
         <Route index element = { <Patients /> } />
         <Route path = "new" element = { <NewPatient /> } />
+        <Route path = "edit/:id" element = { <EditPatient /> } />
+        <Route path = "/:id" element = { <ShowPatient /> } />
         <Route path = "/*" element = { <Navigate to = { `${basepath}` }/> }/>
       </Routes>
     </>

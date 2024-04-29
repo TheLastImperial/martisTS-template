@@ -4,7 +4,7 @@ import {
   Grid,
   InputLabel,
   OutlinedInput,
-  Stack
+  Stack,
 } from "@mui/material";
 
 import { UI } from "src/ui";
@@ -14,20 +14,28 @@ import { es } from "date-fns/locale";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { usePatientStore } from "../hooks/usePatientStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { parse } from "date-fns";
 
-interface INewPatient {
+interface IEditPatient {
   name: string
   fatherLastname: string
   motherLastname: string
   birthday: Date
 };
-export const NewPatient = ()=>{
+export const EditPatient = ()=>{
   const navigate = useNavigate();
-  const { startSavingPatient } = usePatientStore()
+  const { id } = useParams();
+  const {
+    startUpdatingPatient,
+    startGetPatient,
+    currentPatient,
+  } = usePatientStore()
   const {
     register,
     handleSubmit,
+    reset,
     control,
     formState: {
       touchedFields,
@@ -35,15 +43,35 @@ export const NewPatient = ()=>{
       isSubmitting,
       isValid,
     }
-  } = useForm<INewPatient>();
+  } = useForm<IEditPatient>();
 
-  const onSubmit: SubmitHandler<INewPatient> = (data) => {
+  const onSubmit: SubmitHandler<IEditPatient> = (data) => {
     if(!isValid)
       return;
-    startSavingPatient(data);
+    console.log('Actualizar paciente')
+    console.log(data)
+    startUpdatingPatient(+id, data);
     // Se deberian usar las opciones del menu...
     navigate("/patients");
   }
+
+  useEffect(()=>{
+    if(id){
+      startGetPatient(+id);
+    }
+  }, [id]);
+
+  useEffect(()=>{
+    if(currentPatient)
+      reset({
+        ...currentPatient,
+        birthday: parse(
+          currentPatient.birthday,
+          "yyyy-MM-dd",
+          new Date()
+        )
+      });
+  }, [currentPatient]);
 
   return (
   <>

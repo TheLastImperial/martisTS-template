@@ -38,7 +38,7 @@ export const RoutesApp = ()=>{
         ) : (
           <>
             <Route path="/" element = { <Patients/> }/>
-            <Route path="/patient/*" element = { <PatientRoutes /> }/>
+            <Route path="/patients/*" element = { <PatientRoutes /> }/>
             <Route path="/*" element={ <Navigate to="/"/> }/>
           </>
         )

@@ -17,8 +17,9 @@ export const useAuthStore = () => {
   // Methods
   const startLogin = async({ user, rememberUser }: IStartLoginProps)=>{
     dispatch(onChecking());
+    console.log(user)
     try {
-      const { data } = await Api.post('/auth', user);
+      const { data } = await Api.post('/auth/login', user);
       localStorage.setItem('token', data.token);
       if(rememberUser)
         localStorage.setItem('rememberUser', 'yes');
@@ -36,14 +37,21 @@ export const useAuthStore = () => {
     }
   };
 
-  const startCheckingAuth = ()=>{
+  const startCheckingAuth = async ()=>{
     const token = localStorage.getItem('token') || '';
     if(token === ''){
       dispatch(onLogout(null));
       return;
     }
-    const user = jwtDecode<IUser>(token);
-    dispatch(onLogin(user));
+    try{
+      const { data } = await Api.get('auth/renew');
+      localStorage.setItem('token', data.token);
+      const user = jwtDecode<IUser>(token);
+      dispatch(onLogin(user));
+    }catch(error){
+      localStorage.clear();
+      dispatch( onLogout(null) );
+    }
   };
 
   const startCheckingRememberUser = ()=>{

@@ -2,6 +2,37 @@ import { Menu } from "../interfaces";
 
 export const menu: Menu[] = [
   {
+    id: 'group-patients',
+    title: 'Pacientes',
+    type: 'group',
+    children: [
+      {
+        id: 'patients',
+        title: 'Patients',
+        type: 'item',
+        url: '/patients',
+        icon: "DashboardOutlined",
+        breadcrumbs: false
+      },
+      {
+        id: 'new-patients',
+        title: 'New Patient',
+        type: 'item',
+        url: '/patients/new',
+        icon: "DashboardOutlined",
+        breadcrumbs: false
+      },
+      {
+        id: 'edit-patients',
+        title: 'Edit Patient',
+        type: 'item',
+        url: '/patients/edit',
+        icon: "DashboardOutlined",
+        breadcrumbs: false
+      },
+    ]
+  },
+  {
     id: 'group-dashboard',
     title: 'Navigation',
     type: 'group',

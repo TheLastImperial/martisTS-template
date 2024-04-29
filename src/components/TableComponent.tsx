@@ -19,11 +19,14 @@ import {
   EditOutlined,
   EyeOutlined
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 interface TableComponentProps<T> {
   data: (T & { id: string })[];
   header: IHeader[];
   count: number;
+  baseUrl: string;
+  handleOnDelete: (id: string )=>void;
   getData: (limit: number, offset: number, q: (string | undefined))=> void;
 };
 
@@ -31,7 +34,9 @@ export const TableComponent = <T extends Object>({
   getData,
   header,
   data,
-  count
+  count,
+  baseUrl,
+  handleOnDelete,
 }: TableComponentProps<T>) => {
 
   const [ page, setPage ] = useState(0);
@@ -96,6 +101,7 @@ export const TableComponent = <T extends Object>({
             </TableHead>
             <TableBody>
               {
+                data &&
                 data.map(dt => {
                   return (
                     <TableRow key={dt.id}>
@@ -112,17 +118,23 @@ export const TableComponent = <T extends Object>({
                       <TableCell key={`${dt.id}-opts`}>
                         <IconButton size="large"
                           color="primary"
-                          onClick={()=>{ console.log('asdf')}}>
+                          component={ Link }
+                          to = { `${baseUrl}/${dt['id']}` }
+                          >
                           <EyeOutlined />
                         </IconButton>
                         <IconButton size="large"
                           color="primary"
-                          onClick={()=>{ console.log('asdf')}}>
+                          component={ Link }
+                          to = { `${baseUrl}/edit/${dt['id']}`}
+                          >
                           <EditOutlined />
                         </IconButton>
                         <IconButton size="large"
                           color="primary"
-                          onClick={()=>{ console.log('asdf')}}>
+                          onClick={()=>{
+                              handleOnDelete(dt['id'])
+                          }}>
                           <CloseCircleOutlined />
                         </IconButton>
                       </TableCell>

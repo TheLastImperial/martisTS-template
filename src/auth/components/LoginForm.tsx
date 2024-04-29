@@ -38,7 +38,12 @@ export const LoginForm = () => {
       isSubmitting,
       touchedFields,
     },
-  } = useForm<IUserLogin>();
+  } = useForm<IUserLogin>({
+      defaultValues: {
+        email: "correo@correo.com",
+        password: "123456",
+      }
+    });
 
   // Methods
   const onSubmit: SubmitHandler<IUserLogin> = (data)=>{

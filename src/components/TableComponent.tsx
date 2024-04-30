@@ -26,7 +26,7 @@ interface TableComponentProps<T> {
   header: IHeader[];
   count: number;
   baseUrl: string;
-  handleOnDelete: (id: string )=>void;
+  handleOnDelete?: (id: string )=>void;
   getData: (limit: number, offset: number, q: (string | undefined))=> void;
 };
 
@@ -130,13 +130,16 @@ export const TableComponent = <T extends Object>({
                           >
                           <EditOutlined />
                         </IconButton>
-                        <IconButton size="large"
-                          color="primary"
-                          onClick={()=>{
-                              handleOnDelete(dt['id'])
-                          }}>
-                          <CloseCircleOutlined />
-                        </IconButton>
+                        {
+                          handleOnDelete &&
+                          <IconButton size="large"
+                            color="primary"
+                            onClick={()=>{
+                                handleOnDelete(dt['id'])
+                            }}>
+                            <CloseCircleOutlined />
+                          </IconButton>
+                        }
                       </TableCell>
                     </TableRow>
                   );

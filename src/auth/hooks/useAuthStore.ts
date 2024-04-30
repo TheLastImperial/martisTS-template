@@ -44,7 +44,7 @@ export const useAuthStore = () => {
       return;
     }
     try{
-      const { data } = await Api.get('auth/renew');
+      const { data } = await Api.get('auth/check-status');
       localStorage.setItem('token', data.token);
       const user = jwtDecode<IUser>(token);
       dispatch(onLogin(user));

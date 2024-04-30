@@ -22,14 +22,6 @@ export const menu: Menu[] = [
         icon: "DashboardOutlined",
         breadcrumbs: false
       },
-      {
-        id: 'edit-patients',
-        title: 'Edit Patient',
-        type: 'item',
-        url: '/patients/edit',
-        icon: "DashboardOutlined",
-        breadcrumbs: false
-      },
     ]
   },
   {

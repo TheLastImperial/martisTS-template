@@ -26,41 +26,50 @@ interface TableComponentProps<T> {
   header: IHeader[];
   count: number;
   baseUrl: string;
+  defaultSearch?: string;
+  canSearch?: boolean;
+  canEdit?: boolean;
   handleOnDelete?: (id: string )=>void;
   getData: (limit: number, offset: number, q: (string | undefined))=> void;
 };
 
 export const TableComponent = <T extends Object>({
-  getData,
   header,
   data,
   count,
   baseUrl,
+  defaultSearch="",
+  canSearch= true,
+  canEdit=true,
+  getData,
   handleOnDelete,
 }: TableComponentProps<T>) => {
 
   const [ page, setPage ] = useState(0);
   const [ limit, setLimit ] = useState(5);
-  const [ q, setQ ] = useState<string>();
+  const [ q, setQ ] = useState<string>(defaultSearch);
 
   useEffect(()=>{
     getData(limit, page, q);
   }, [ page, limit, q ]);
   return (
     <>
-      <Stack direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={ 1 }>
-        <InputLabel>
-          Buscar
-        </InputLabel>
-        <OutlinedInput type="text"
-          onChange={
-            (event) => setQ(event.target.value)
-          }
-        />
-      </Stack>
+      {
+        canSearch &&
+        <Stack direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={ 1 }>
+          <InputLabel>
+            Buscar
+          </InputLabel>
+          <OutlinedInput type="text"
+            onChange={
+              (event) => setQ(event.target.value)
+            }
+          />
+        </Stack>
+      }
       <Box>
         <TableContainer
           sx={{
@@ -123,13 +132,16 @@ export const TableComponent = <T extends Object>({
                           >
                           <EyeOutlined />
                         </IconButton>
-                        <IconButton size="large"
-                          color="primary"
-                          component={ Link }
-                          to = { `${baseUrl}/edit/${dt['id']}`}
-                          >
-                          <EditOutlined />
-                        </IconButton>
+                        {
+                          canEdit &&
+                          <IconButton size="large"
+                            color="primary"
+                            component={ Link }
+                            to = { `${baseUrl}/edit/${dt['id']}`}
+                            >
+                            <EditOutlined />
+                          </IconButton>
+                        }
                         {
                           handleOnDelete &&
                           <IconButton size="large"

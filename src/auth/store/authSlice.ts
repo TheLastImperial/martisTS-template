@@ -5,13 +5,14 @@ const initialState: IInitialState = {
   user: null,
   status: 'not-authenticated', //authenticated - not-authenticated
   msg: null,
+  emailExists: true,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    onChecking: ( state)=>{
+    onChecking: ( state )=>{
       state.status = 'checking';
     },
     onLogin: (state, { payload }: { payload: IUser })=>{
@@ -22,8 +23,16 @@ export const authSlice = createSlice({
       state.user = null;
       state.status = 'not-authenticated';
       state.msg = payload;
-    }
+    },
+    onSetEmailExists: ( state, { payload })=>{
+      state.emailExists = payload;
+    },
   }
 });
 
-export const { onChecking, onLogin, onLogout } = authSlice.actions;
+export const {
+  onChecking,
+  onLogin,
+  onLogout,
+  onSetEmailExists,
+} = authSlice.actions;

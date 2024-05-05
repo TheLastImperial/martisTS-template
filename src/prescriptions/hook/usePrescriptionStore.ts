@@ -1,6 +1,7 @@
 import Api from "src/api/Api";
 import { useAppDispatch, useAppSelector } from "src/store";
 import { onSetPrescriptions } from "../store";
+import { INewPrescription, IPrescriptionForm } from "../interfaces";
 
 export const usePrescriptionStore = ()=> {
   const {
@@ -24,9 +25,11 @@ export const usePrescriptionStore = ()=> {
     }
   };
 
-  const startSavingPrescriptions = async (prescription) =>{
+  const startSavingPrescriptions = async (
+    prescription: INewPrescription & IPrescriptionForm) =>{
     try{
       const { data } = await Api.post('/prescriptions', prescription);
+      console.log(data);
     }catch(e){
       console.log(e)
     }

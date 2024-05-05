@@ -26,7 +26,7 @@ interface IEditPatient {
 };
 export const EditPatient = ()=>{
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id='0' } = useParams();
   const {
     startUpdatingPatient,
     startGetPatient,

@@ -117,9 +117,13 @@ export const TableComponent = <T extends Object>({
                       {
                         header.map( row => {
                           return (
+                            // @ts-ignore
                             <TableCell key={ `${row.id}-${dt[row.id]}`}
                               align="center">
-                              { dt[row.id] }
+                              {
+                                // @ts-ignore
+                                dt[row.id]
+                              }
                             </TableCell>
                           );
                         })

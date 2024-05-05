@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onChecking, onLogin, onLogout } from "../store";
-import { IStartLoginProps, IUser, IErrorResponse } from "../interfaces";
-import Api from "../../api/Api";
-import { AppDispatch, RootState } from "../../store/store";
+
 import { jwtDecode } from "jwt-decode";
 import { AxiosError } from "axios";
+
+import { onChecking, onLogin, onLogout, onSetEmailExists } from "../store";
+import { IStartLoginProps, IUser, IErrorResponse, INewUser } from "../interfaces";
+import Api from "../../api/Api";
+import { AppDispatch, RootState } from "../../store/store";
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
@@ -12,9 +14,31 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 export const useAuthStore = () => {
   // Atributtes
   const dispatch = useAppDispatch();
-  const { status, msg } = useAppSelector((state) => state.auth);
+  const { status, msg, emailExists } = useAppSelector((state) => state.auth);
 
+  const startCheckEmailExists = async (email: string) =>{
+    try {
+      const { data } = await Api.post( '/auth/email-exists', { email } );
+      console.log(data.exists);
+      dispatch(onSetEmailExists(data.exists));
+    } catch(error) {
+      console.log(error);
+      dispatch(onSetEmailExists(true));
+    }
+  }
   // Methods
+  const startRegister = async (user: INewUser) => {
+    dispatch(onChecking());
+    try{
+      const { data } = await Api.post('/auth/register', user);
+      console.log(data);
+    }catch(error){
+      // @ts-ignore
+      const { response: { data: { message = [] }} } = error;
+      dispatch(onLogout(''));
+    }
+  }
+
   const startLogin = async({ user, rememberUser }: IStartLoginProps)=>{
     dispatch(onChecking());
     console.log(user)
@@ -69,9 +93,12 @@ export const useAuthStore = () => {
   return {
     status,
     msg,
+    emailExists,
     startLogin,
     startCheckingAuth,
     startCheckingRememberUser,
-    startLogout
+    startLogout,
+    startRegister,
+    startCheckEmailExists,
   };
 };

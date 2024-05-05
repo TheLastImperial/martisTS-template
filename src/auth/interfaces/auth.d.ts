@@ -7,6 +7,7 @@ export interface IAuthSlice<U> {
   status: string;
   user: U | null;
   msg: string | null;
+  emailExists: boolean;
 };
 
 export interface IUser {
@@ -27,4 +28,19 @@ export interface IStartLoginProps {
 export interface IErrorResponse {
   ok: boolean,
   msg: string;
+};
+
+export interface INewUser {
+  name: string;
+  motherLastname: string;
+  fatherLastname: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface IPasswordStrength {
+  label: string;
+  value: number;
+  color: string;
 };

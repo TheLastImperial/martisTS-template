@@ -125,7 +125,11 @@ export const LoginForm = () => {
         </Grid>
 
         <Grid item xs={12} sx={{ mt: -1 }}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={2}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -140,7 +144,7 @@ export const LoginForm = () => {
             />
             <Link variant="h6"
               component={RouterLink}
-              to=""
+              to="/auth/recovery"
               color="text.primary">
               Forgot Password?
             </Link>

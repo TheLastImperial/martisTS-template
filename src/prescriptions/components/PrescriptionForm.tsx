@@ -7,17 +7,14 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { usePrescriptionStore } from "../hook";
+import { INewPrescription, IPrescriptionForm } from "../interfaces";
 
-interface INewPrescription {
-  description: string
-}
-
-export const PrescriptionForm = ({ patientId }) =>{
+export const PrescriptionForm = ({ patientId }: IPrescriptionForm) =>{
   const { startSavingPrescriptions } = usePrescriptionStore();
 
   const { register, handleSubmit } = useForm<INewPrescription>();
 
-  const onSubmit = (data)=>{
+  const onSubmit = (data: INewPrescription)=>{
     startSavingPrescriptions({
       ...data,
       patientId,

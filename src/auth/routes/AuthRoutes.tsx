@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom"
-import { Login, Recovery, Register } from "../pages"
+import { Login, NewPassword, Recovery, Register } from "../pages"
 import { ReactNode, useMemo } from "react"
 
 export const AuthRoutes = (): ReactNode =>{
@@ -19,6 +19,7 @@ export const AuthRoutes = (): ReactNode =>{
         <Route path="login" element={ <Login/> }/>
         <Route path="register" element={ <Register/> }/>
         <Route path="recovery" element={ <Recovery /> }/>
+        <Route path="new-password/:token" element={ <NewPassword /> }/>
         <Route path="/*" element={ <Navigate to={ `${basepath}/login` }/> }/>
       </Routes>
     </>

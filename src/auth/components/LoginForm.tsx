@@ -66,9 +66,10 @@ export const LoginForm = () => {
               { ...register('email', {
                 required: 'You most set a email format.',
                 pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: 'Please enter a valid email',
-              } }) }/>
+                  value: /\S+@\S+\.\S+/,
+                  message: 'Please enter a valid email',
+                },
+              }) }/>
               {
                 touchedFields.email &&
                 errors.email &&

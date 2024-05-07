@@ -17,7 +17,7 @@ export interface IUser {
 };
 
 export interface IInitialState extends IAuthSlice<IUser> {
-
+  pwdStrength: IPasswordStrength;
 };
 
 export interface IStartLoginProps {
@@ -43,4 +43,13 @@ export interface IPasswordStrength {
   label: string;
   value: number;
   color: string;
+};
+
+export interface IEmail {
+  email: string;
+};
+
+export interface INewPassword {
+  password: string;
+  passwordConfirmation: string;
 };

@@ -6,6 +6,11 @@ const initialState: IInitialState = {
   status: 'not-authenticated', //authenticated - not-authenticated
   msg: null,
   emailExists: true,
+  pwdStrength: {
+    color: 'error.main',
+    label: 'Muy Debil',
+    value: 25
+  }
 };
 
 export const authSlice = createSlice({
@@ -27,6 +32,9 @@ export const authSlice = createSlice({
     onSetEmailExists: ( state, { payload })=>{
       state.emailExists = payload;
     },
+    onSetPwdStrength: (state, { payload })=> {
+      state.pwdStrength = payload;
+    },
   }
 });
 
@@ -35,4 +43,5 @@ export const {
   onLogin,
   onLogout,
   onSetEmailExists,
+  onSetPwdStrength,
 } = authSlice.actions;

@@ -6,3 +6,5 @@ export * from './AnimateButton';
 export * from './SimpleBar';
 export * from './Logo';
 export * from './TableComponent';
+export * from './MessageDialog';
+export * from './ConfirmDialog';

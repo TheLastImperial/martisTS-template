@@ -1,12 +1,20 @@
+import { useState } from "react";
+
 import { UI } from "src/ui";
+import {
+  ConfirmDialog, MainCard,
+  TableComponent
+} from "src/components";
+
 import { usePatientStore } from "../hooks/usePatientStore";
-import { MainCard, TableComponent } from "src/components";
-import { useEffect } from "react";
-import { AlertHelper } from "src/helpers/AlertHelper";
 
 export const Patients = () => {
-  const { patients, count,
-    startGetPatients, startDeletingPatient
+  const [ open, setOpen ] = useState(false);
+  const [ idDelete, setIdDelete ] = useState("");
+  const {
+    patients, count,
+    startGetPatients,
+    startDeletingPatient,
   } = usePatientStore();
   const header = [
     {
@@ -23,21 +31,17 @@ export const Patients = () => {
     },
   ];
 
-  useEffect(()=>{
-    console.log({
-      patients, count
-    })
-  }, []);
-
   const handleDelete = (id: string)=>{
-    AlertHelper.yesOrNot(
-      "Eliminar paciente",
-      "¿ Seguro que desea eliminar el paciente ?",
-      () => {
-        startDeletingPatient(id);
-        startGetPatients();
-      });
-  }
+    setIdDelete(id);
+    setOpen(true);
+  };
+
+  const handleOnConfirm = () => {
+    startDeletingPatient(idDelete);
+    startGetPatients();
+    setIdDelete("");
+  };
+
   return (
     <UI>
       <MainCard>
@@ -47,7 +51,14 @@ export const Patients = () => {
           data = { patients }
           header = { header }
           baseUrl="/patients"
-          handleOnDelete={ handleDelete }/>
+          handleOnDelete={ handleDelete } />
+
+          <ConfirmDialog
+            open={ open }
+            title="Eliminar paciente"
+            message="¿ Seguro que desea eliminar al paciente ?"
+            handleOnCancel = { ()=> setOpen(false) }
+            handleOnConfirm={ handleOnConfirm }/>
       </MainCard>
     </UI>
   );

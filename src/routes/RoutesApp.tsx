@@ -1,17 +1,22 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom"
+
 import { useAuthStore } from "../auth/hooks/useAuthStore";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
-import { useEffect } from "react";
-// import SamplePage from "../pages/SamplePage";
-// import { MyPage } from "src/home/pages/MyPage";
-import { Patients } from "src/patients/page/Patients";
-import { PatientRoutes } from "src/patients/routes/PatientRoute";
+import { Patients } from "src/patients/page";
+import { PatientRoutes } from "src/patients/routes";
+import { useUIStore } from "src/ui/hooks";
+
+import { Loading } from "../components";
 
 export const RoutesApp = ()=>{
   const { status,
     startCheckingAuth,
     startCheckingRememberUser
   } = useAuthStore();
+  const {
+    loading
+  } = useUIStore();
 
   useEffect(()=>{
     startCheckingAuth();
@@ -25,7 +30,6 @@ export const RoutesApp = ()=>{
       window.removeEventListener('unload', handleTabClosing)
     }
   });
-  if (status === 'checking') return <h1>Cargando</h1>;
   return (<>
     <Routes>
       {
@@ -44,5 +48,6 @@ export const RoutesApp = ()=>{
         )
       }
     </Routes>
+    <Loading open={ loading }/>
   </>)
 }

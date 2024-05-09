@@ -17,9 +17,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    onChecking: ( state )=>{
-      state.status = 'checking';
-    },
     onLogin: (state, { payload }: { payload: IUser })=>{
       state.user = payload;
       state.status = 'authenticated';

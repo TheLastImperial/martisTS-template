@@ -1,19 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 
+import Api from "../../api/Api";
+
 import { jwtDecode } from "jwt-decode";
 import { AxiosError } from "axios";
 
 import {
-  onChecking, onLogin, onLogout,
-  onSetEmailExists, onSetPwdStrength,
+  onLogin, onLogout, onSetEmailExists, onSetPwdStrength,
 } from "../store";
 import {
   IStartLoginProps, IUser, IErrorResponse,
   INewUser, IEmail, IPasswordStrength,
   INewPassword,
 } from "../interfaces";
-import Api from "../../api/Api";
-import { AppDispatch, RootState } from "../../store/store";
+import { AppDispatch, RootState } from "../../store";
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
@@ -58,7 +58,6 @@ export const useAuthStore = () => {
   }
   // Methods
   const startRegister = async (user: INewUser) => {
-    dispatch(onChecking());
     try{
       const { data } = await Api.post('/auth/register', user);
       console.log(data);
@@ -70,7 +69,6 @@ export const useAuthStore = () => {
   }
 
   const startLogin = async({ user, rememberUser }: IStartLoginProps)=>{
-    dispatch(onChecking());
     console.log(user)
     try {
       const { data } = await Api.post('/auth/login', user);

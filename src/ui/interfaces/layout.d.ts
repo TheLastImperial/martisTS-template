@@ -34,7 +34,8 @@ export interface UIState {
   openItem: string[]
   config: ConfigState
   notifications: Notification[]
-  menu: Menu[]
+  menu: Menu[];
+  loading: boolean;
 };
 
 export interface ConfigState {

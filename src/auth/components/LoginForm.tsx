@@ -24,11 +24,13 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuthStore } from '../hooks/useAuthStore';
 import { IUserLogin } from '../interfaces';
 import { AnimateButton } from 'src/components';
+import { useUIStore } from 'src/ui/hooks';
 
 export const LoginForm = () => {
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { msg, startLogin } = useAuthStore();
+  const { startSetLoading } = useUIStore();
   const {
     register,
     handleSubmit,
@@ -49,8 +51,10 @@ export const LoginForm = () => {
   const onSubmit: SubmitHandler<IUserLogin> = (data)=>{
     if(!isValid)
       return;
-      startLogin({user: data, rememberUser: checked});
-  }
+    startSetLoading(true);
+    startLogin({user: data, rememberUser: checked});
+    startSetLoading(false);
+  };
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>

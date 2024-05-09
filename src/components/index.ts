@@ -8,3 +8,4 @@ export * from './Logo';
 export * from './TableComponent';
 export * from './MessageDialog';
 export * from './ConfirmDialog';
+export * from './Loading';

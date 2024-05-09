@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { uiSlice } from '../ui/store'
 import { patientsSlice } from "src/patients/store/patientsSlice";
 import { prescriptionSlice } from "src/prescriptions/store";
+
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,

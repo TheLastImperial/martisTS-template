@@ -36,7 +36,8 @@ const initialState: UIState = {
       secondaryTxt: 'Soy el texto secundario',
       caption: '10:00 AM',
     },
-  ]
+  ],
+  loading: false,
 };
 
 export const uiSlice = createSlice({
@@ -55,6 +56,9 @@ export const uiSlice = createSlice({
     onSetDraweOpen: (state, { payload })=>{
       state.drawerOpen = payload;
     },
+    onSetLoading: (state, { payload })=> {
+      state.loading = payload;
+    },
   }
 });
 
@@ -63,4 +67,5 @@ export const {
   onSetNotifications,
   onSetOpenItem,
   onSetDraweOpen,
+  onSetLoading,
 } = uiSlice.actions;

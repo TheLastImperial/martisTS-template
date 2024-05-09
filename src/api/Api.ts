@@ -13,10 +13,10 @@ const Api = axios.create({
 
 Api.interceptors
   .request.use((config) => {
-  config.headers = {
-    ...config.headers,
-    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-  } as CustomAxiosRequestHeaders;
+    config.headers = {
+      ...config.headers,
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    } as CustomAxiosRequestHeaders;
   return config;
 });
 

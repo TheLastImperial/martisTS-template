@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Palette from './palette';
 import CustomShadows from './shadows';
 import componentsOverride from './overrides';
+import Typography from './typography';
 
 interface ThemeCustomizationProps {
   children: ReactNode
@@ -17,9 +18,8 @@ export default function ThemeCustomization(
   { children }: ThemeCustomizationProps) {
   // const theme = Palette('light', 'default');
   const theme = Palette('light');
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // const themeTypography = Typography(`'Public Sans', sans-serif`);
+  const themeTypography = Typography(`'Public Sans', sans-serif`);
   const themeCustomShadows = useMemo(() => CustomShadows(theme), [theme]);
 
   const themeOptions = useMemo(
@@ -43,10 +43,10 @@ export default function ThemeCustomization(
       },
       palette: theme.palette,
       customShadows: themeCustomShadows,
-      // typography: themeTypography
+      typography: themeTypography
     }),
-    // [theme, themeTypography, themeCustomShadows]
-    [theme, themeCustomShadows]
+    [theme, themeTypography, themeCustomShadows]
+    // [theme, themeCustomShadows]
   );
 
   const themes = createTheme(themeOptions);

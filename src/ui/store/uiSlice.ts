@@ -16,6 +16,7 @@ const initialState: UIState = {
     miniDrawer: false,
     container: true,
     mode: 'light',
+    darkMode: false,
     presetColor: 'default',
     themeDirection: 'ltr'
   },
@@ -59,6 +60,10 @@ export const uiSlice = createSlice({
     onSetLoading: (state, { payload })=> {
       state.loading = payload;
     },
+    onSetMode: (state, { payload }) => {
+      state.config.darkMode = payload;
+      state.config.mode = payload ? 'dark' : 'light';
+    },
   }
 });
 
@@ -68,4 +73,5 @@ export const {
   onSetOpenItem,
   onSetDraweOpen,
   onSetLoading,
+  onSetMode,
 } = uiSlice.actions;

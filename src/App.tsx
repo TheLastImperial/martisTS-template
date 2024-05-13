@@ -1,19 +1,19 @@
 import { BrowserRouter } from 'react-router-dom';
+import { PaletteMode } from '@mui/material';
+
 import ThemeCustomization from './themes';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
 import { RoutesApp } from './routes/RoutesApp';
+import { useUIStore } from './ui/hooks';
 
 function App() {
+  const { mode } = useUIStore();
   return (
     <>
-      <Provider store={store}>
+      <ThemeCustomization mode={ mode as PaletteMode }>
         <BrowserRouter>
-          <ThemeCustomization>
-            <RoutesApp/>
-          </ThemeCustomization>
+          <RoutesApp />
         </BrowserRouter>
-      </Provider>
+      </ThemeCustomization>
     </>
   )
 }

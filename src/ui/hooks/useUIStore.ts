@@ -1,5 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'src/store'
-import { onSetDraweOpen, onSetLoading, onSetOpenItem } from '../store';
+import {
+  onSetDraweOpen, onSetLoading, onSetMode, onSetOpenItem,
+} from '../store';
 
 export const useUIStore = () => {
   const dispatch = useAppDispatch();
@@ -10,6 +12,10 @@ export const useUIStore = () => {
     menu,
     notifications,
     loading,
+    config: {
+      darkMode,
+      mode,
+    }
   } = useAppSelector((state) => state.ui);
 
   const startActiveItem = (item: string[])=>{
@@ -24,6 +30,10 @@ export const useUIStore = () => {
     dispatch(onSetLoading(loading))
   };
 
+  const startSetDarkMode = (darkMode: boolean) => {
+    dispatch(onSetMode(darkMode))
+  }
+
   return {
     drawerWidth,
     drawerOpen,
@@ -31,8 +41,11 @@ export const useUIStore = () => {
     menu,
     notifications,
     loading,
+    darkMode,
+    mode,
     startActiveItem,
     startOpenDrawer,
     startSetLoading,
+    startSetDarkMode,
   };
 };

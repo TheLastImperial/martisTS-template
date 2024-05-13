@@ -44,7 +44,8 @@ export interface ConfigState {
   i18n: string
   miniDrawer: boolean
   container: boolean
-  mode: string
+  mode: string;
+  darkMode: boolean;
   presetColor: string
   themeDirection: string
 };

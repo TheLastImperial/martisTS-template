@@ -1,9 +1,12 @@
-import { Box, List, Typography } from '@mui/material';
+import { Box, Collapse, List, Stack, Typography } from '@mui/material';
 
 // project import
 import NavItem from './NavItem';
 import { useUIStore } from 'src/ui/hooks/useUIStore';
 import { Menu } from 'src/ui/interfaces';
+import { AnimateButton } from 'src/components';
+import { DownOutlined, LeftOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 
 interface NavGroupProps {
   item: Menu
@@ -11,17 +14,19 @@ interface NavGroupProps {
 
 const NavGroup = ({ item }: NavGroupProps) => {
   const { drawerOpen } = useUIStore();
+  const [ isCollapsed, setIsCollapsed ] = useState(false);
+  let isCollapsable = false;
 
   const navCollapse = item.children?.map((menuItem) => {
     switch (menuItem.type) {
       case 'collapse':
+        isCollapsable = true;
         return (
-          <Typography key={menuItem.id}
-            variant="caption"
-            color="error"
-            sx={{ p: 2.5 }}>
-            collapse - only available in paid version
-          </Typography>
+          <Collapse in={isCollapsed} key={menuItem.id}>
+            <NavItem
+              item={menuItem}
+              level={1}/>
+          </Collapse>
         );
       case 'item':
         return <NavItem
@@ -46,11 +51,27 @@ const NavGroup = ({ item }: NavGroupProps) => {
       subheader={
         item.title &&
         drawerOpen && (
-          <Box sx={{ pl: 3, mb: 1.5 }}>
-            <Typography variant="subtitle2" color="textSecondary">
-              {item.title}
-            </Typography>
-            {/* only available in paid version */}
+          <Box sx={{ px: 3, mb: 1.5 }}>
+            <AnimateButton>
+              <Stack
+                sx={{
+                  cursor: 'pointer'
+                }}
+                direction="row"
+                justifyContent={"space-between"}
+                onClick={ ()=> setIsCollapsed(!isCollapsed) }>
+                <Typography variant="subtitle2" color="textSecondary">
+                  {item.title}
+                </Typography>
+                {
+                  isCollapsable &&
+                  isCollapsed ?
+                  <DownOutlined color="secondary"/>
+                  :
+                  <LeftOutlined color="secondary"/>
+                }
+              </Stack>
+            </AnimateButton>
           </Box>
         )
       }

@@ -75,7 +75,7 @@ export const Breadcrumbs = ({
     itemTitle = menuItem.title;
     itemContent = (
       <Typography variant="subtitle1" color="textPrimary">
-        {itemTitle}
+        { itemTitle }
       </Typography>
     );
 
@@ -105,7 +105,9 @@ export const Breadcrumbs = ({
             </Grid>
             {title && (
               <Grid item sx={{ mt: 2 }}>
-                <Typography variant="h5">{menuItem.title}</Typography>
+                <Typography variant="h5">
+                  { menuItem.title }
+                </Typography>
               </Grid>
             )}
           </Grid>

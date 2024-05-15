@@ -29,7 +29,6 @@ import { useUIStore } from 'src/ui/hooks';
 
 export const LoginForm = () => {
   const theme = useTheme();
-  console.log(theme);
 
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

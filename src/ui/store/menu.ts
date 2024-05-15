@@ -9,7 +9,7 @@ export const menu: Menu[] = [
       {
         id: 'patients',
         title: 'Patients',
-        type: 'item',
+        type: 'collapse',
         url: '/patients',
         icon: "DashboardOutlined",
         breadcrumbs: false
@@ -17,7 +17,7 @@ export const menu: Menu[] = [
       {
         id: 'new-patients',
         title: 'New Patient',
-        type: 'item',
+        type: 'collapse',
         url: '/patients/new',
         icon: "DashboardOutlined",
         breadcrumbs: false

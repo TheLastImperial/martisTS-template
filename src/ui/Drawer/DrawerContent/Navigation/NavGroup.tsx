@@ -6,7 +6,7 @@ import { useUIStore } from 'src/ui/hooks/useUIStore';
 import { Menu } from 'src/ui/interfaces';
 import { AnimateButton } from 'src/components';
 import { DownOutlined, LeftOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface NavGroupProps {
   item: Menu
@@ -15,6 +15,7 @@ interface NavGroupProps {
 const NavGroup = ({ item }: NavGroupProps) => {
   const { drawerOpen } = useUIStore();
   const [ isCollapsed, setIsCollapsed ] = useState(false);
+  const ref = useRef<HTMLUListElement>(null);
   let isCollapsable = false;
 
   const navCollapse = item.children?.map((menuItem) => {
@@ -46,8 +47,15 @@ const NavGroup = ({ item }: NavGroupProps) => {
     }
   });
 
+  // Funciona pero se cierra y abre.
+  useEffect(()=>{
+    if(isCollapsable && ref)
+      setIsCollapsed(!!ref?.current?.querySelector('.Mui-selected'));
+  }, [ref]);
+
   return (
     <List
+      ref = { ref }
       subheader={
         item.title &&
         drawerOpen && (
@@ -59,7 +67,7 @@ const NavGroup = ({ item }: NavGroupProps) => {
                 }}
                 direction="row"
                 justifyContent={"space-between"}
-                onClick={ ()=> setIsCollapsed(!isCollapsed) }>
+                onClick={ ()=> setIsCollapsed((prev) => !prev) }>
                 <Typography variant="subtitle2" color="textSecondary">
                   {item.title}
                 </Typography>

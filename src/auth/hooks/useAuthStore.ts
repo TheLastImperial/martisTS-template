@@ -28,7 +28,8 @@ export const useAuthStore = () => {
 
   const startRecoveryPassword = async (email: IEmail) => {
     try {
-      const _resp = await Api.post('/auth/recovery-password', email);
+      const resp = await Api.post('/auth/recovery-password', email);
+      console.log(resp)
     } catch(error){
       console.log(error)
     }

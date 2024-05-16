@@ -36,7 +36,6 @@ export const authSlice = createSlice({
 });
 
 export const {
-  onChecking,
   onLogin,
   onLogout,
   onSetEmailExists,

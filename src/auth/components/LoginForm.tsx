@@ -14,7 +14,6 @@ import {
   OutlinedInput,
   Stack,
   Typography,
-  useTheme
 } from '@mui/material';
 
 import { FirebaseSocial } from '.';
@@ -28,7 +27,6 @@ import { AnimateButton } from 'src/components';
 import { useUIStore } from 'src/ui/hooks';
 
 export const LoginForm = () => {
-  const theme = useTheme();
 
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

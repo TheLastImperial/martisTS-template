@@ -7,7 +7,6 @@ import {
 
 import {
   Button,
-  Divider,
   FormControl,
   FormHelperText,
   Grid,IconButton,
@@ -22,7 +21,6 @@ import { useForm } from "react-hook-form";
 import { passwordStrength } from "check-password-strength";
 
 import { AnimateButton } from "src/components";
-import { FirebaseSocial } from "./FirebaseSocial";
 import { INewUser, IPasswordStrength } from "../interfaces";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { PasswordStrengthOpts } from "../constants";

@@ -31,6 +31,7 @@ import { PasswordStrengthOpts } from "../constants";
 export const RegisterForm = ()=>{
 
   const [ showPassword, setShowPassword ] = useState(false);
+  const [ showPasswordConfirm, setShowPasswordConfirm ] = useState(false);
   const [ pwdStrength, setPwdStrength ] = useState<IPasswordStrength>({
     color: 'error.main',
     label: passwordStrength('', PasswordStrengthOpts).value,
@@ -51,8 +52,6 @@ export const RegisterForm = ()=>{
     defaultValues: {
       email: 'correo2@correo.com',
       name: 'Nombre',
-      fatherLastname: 'Padre',
-      motherLastname: 'Madre',
       password: '123456A,a',
       passwordConfirmation: '123456A,a'
     }
@@ -83,12 +82,16 @@ export const RegisterForm = ()=>{
     });
     console.log(pwdStrength);
   }
+  const handleClickShowPasswordConfirm = ()=> {
+    setShowPasswordConfirm(!showPasswordConfirm);
+  };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const onSubmit = (data: INewUser) =>{
+    console.log(data);
     startRegister(data);
   }
 
@@ -105,35 +108,6 @@ export const RegisterForm = ()=>{
               autoComplete="off"
               { ...register('name') }
             />
-          </Stack>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Stack spacing={1}>
-            <InputLabel htmlFor="firstname-signup">Apellido paterno</InputLabel>
-            <OutlinedInput
-              type="text"
-              placeholder="John"
-              fullWidth
-              { ...register('motherLastname') }
-            />
-            {
-              touchedFields.motherLastname && errors.motherLastname &&
-              <FormHelperText error>
-                { errors.motherLastname.message }
-              </FormHelperText>
-            }
-          </Stack>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Stack spacing={1}>
-            <InputLabel >Apellido materno</InputLabel>
-            <OutlinedInput
-              fullWidth
-              type="text"
-              placeholder="Doe"
-              autoComplete="off"
-              { ...register("fatherLastname") }
-              />
           </Stack>
         </Grid>
         <Grid item xs={12}>
@@ -177,16 +151,12 @@ export const RegisterForm = ()=>{
             </InputLabel>
             <OutlinedInput
               fullWidth
-              error={
+              error = {
                 Boolean(touchedFields.password && errors.password)
               }
               type={ showPassword ? 'text' : 'password' }
               { ...register("password", {
-                required: "Debe ingresar un correo.",
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: "Ingrese un correo con formato valido",
-                },
+                required: "Debe ingresar una contraseña.",
                 validate: () => {
                   if(pwdStrength.value < 75){
                     return 'Por favor, ingresa una contraseña mas fuerte.';
@@ -198,12 +168,14 @@ export const RegisterForm = ()=>{
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
+                    onClick={ handleClickShowPassword }
                     // onMouseDown={handleMouseDownPassword}
                     edge="end"
                     size="large"
                   >
-                    {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                    {
+                      showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                    }
                   </IconButton>
                 </InputAdornment>
               }
@@ -241,7 +213,7 @@ export const RegisterForm = ()=>{
             </InputLabel>
             <OutlinedInput
               fullWidth
-              type={ 'password' }
+              type={ showPasswordConfirm ? 'text' : 'password' }
               error={
                 Boolean(
                   touchedFields.passwordConfirmation &&
@@ -263,8 +235,13 @@ export const RegisterForm = ()=>{
                     aria-label="toggle password visibility"
                     edge="end"
                     size="large"
+                    onClick={ handleClickShowPasswordConfirm }
                   >
-                    <EyeInvisibleOutlined />
+                    {
+                      showPasswordConfirm ?
+                      <EyeOutlined /> :
+                      <EyeInvisibleOutlined />
+                    }
                   </IconButton>
                 </InputAdornment>
               }
@@ -274,7 +251,9 @@ export const RegisterForm = ()=>{
               touchedFields.passwordConfirmation &&
               errors.passwordConfirmation &&
               <FormHelperText error>
-                { errors.passwordConfirmation.message }
+                {
+                  errors.passwordConfirmation.message
+                }
               </FormHelperText>
             }
           </Stack>
@@ -293,14 +272,6 @@ export const RegisterForm = ()=>{
               Crear cuenta
             </Button>
           </AnimateButton>
-        </Grid>
-        <Grid item xs={12}>
-          <Divider>
-            <Typography variant="caption">Sign up with</Typography>
-          </Divider>
-        </Grid>
-        <Grid item xs={12}>
-          <FirebaseSocial />
         </Grid>
       </Grid>
     </form>

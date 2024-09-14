@@ -22,11 +22,11 @@ export const Patients = () => {
       label: 'Nombre',
     },
     {
-      id: 'fatherLastname',
+      id: 'fatherLastName',
       label: 'Apellido paterno',
     },
     {
-      id: 'motherLastname',
+      id: 'motherLastName',
       label: 'Apellido materno',
     },
   ];

@@ -16,3 +16,26 @@ export interface Patient{
   title: string;
   notes: string;
 };
+
+interface IPhone{
+  number: number
+};
+
+interface INewAddress{
+  street: String;
+  city: String;
+  zip: String;
+};
+
+interface INewPatient {
+  name: string;
+  fatherLastName: string;
+  motherLastName: string;
+  birthday: Date;
+  address: INewAddress;
+  phones: IPhone[];
+};
+
+interface IEditPatient extends INewPatient {
+
+}

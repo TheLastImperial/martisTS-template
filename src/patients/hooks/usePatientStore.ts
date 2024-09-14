@@ -1,13 +1,7 @@
 import Api from "src/api/Api";
 import { useAppDispatch, useAppSelector } from "src/store";
 import { onSetCurrentPatient, onSetPatients } from "../store/patientsSlice";
-
-interface INewPatient {
-  name: string
-  motherLastname: string
-  fatherLastname: string
-  birthday: Date
-};
+import { INewPatient } from "../patients";
 
 export const usePatientStore = ()=>{
   const dispatch = useAppDispatch();
@@ -24,10 +18,14 @@ export const usePatientStore = ()=>{
   ) => {
 
     let params = {
-      limit, offset, q
+      size: limit, page: offset, q
     };
     const { data } = await Api.get('/patients', { params });
-    dispatch(onSetPatients(data));
+    console.log(data);
+    dispatch(onSetPatients({
+      patients: data.content,
+      count: data.totalElements
+    }));
   };
 
   const startSavingPatient = async ( patient : INewPatient)=> {

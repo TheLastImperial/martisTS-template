@@ -15,13 +15,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { usePatientStore } from "../hooks/usePatientStore";
 import { useNavigate } from "react-router-dom";
+import { INewPatient } from "../patients";
 
-interface INewPatient {
-  name: string
-  fatherLastname: string
-  motherLastname: string
-  birthday: Date
-};
+
 export const NewPatient = ()=>{
   const navigate = useNavigate();
   const { startSavingPatient } = usePatientStore()
@@ -40,6 +36,7 @@ export const NewPatient = ()=>{
   const onSubmit: SubmitHandler<INewPatient> = (data) => {
     if(!isValid)
       return;
+    console.log(data);
     startSavingPatient(data);
     // Se deberian usar las opciones del menu...
     navigate("/patients");
@@ -79,17 +76,17 @@ export const NewPatient = ()=>{
                 <OutlinedInput id="fatherLastname"
                   type="text"
                   {
-                    ...register("fatherLastname", {
+                    ...register("fatherLastName", {
                       required: "Debe ingresar un apellido."
                     })
                   }
                 />
                 {
-                  touchedFields.fatherLastname &&
-                  errors.fatherLastname &&
+                  touchedFields.fatherLastName &&
+                  errors.fatherLastName &&
                   <FormHelperText error >
                     {
-                      errors.fatherLastname.message
+                      errors.fatherLastName.message
                     }
                   </FormHelperText>
                 }
@@ -101,17 +98,17 @@ export const NewPatient = ()=>{
                 <OutlinedInput id="mother_lastname"
                   type="text"
                   {
-                    ...register("motherLastname", {
+                    ...register("motherLastName", {
                       required: "Debe ingresar un apellido.",
                     })
                   }
                 />
                 {
-                  touchedFields.motherLastname &&
-                  errors.motherLastname &&
+                  touchedFields.motherLastName &&
+                  errors.motherLastName &&
                   <FormHelperText error >
                     {
-                      errors.motherLastname.message
+                      errors.motherLastName.message
                     }
                   </FormHelperText>
                 }
@@ -152,6 +149,85 @@ export const NewPatient = ()=>{
                 }
               </Stack>
             </Grid>
+            <Grid item spacing={ 1 }>
+              <Stack spacing={ 1 }>
+                <InputLabel>Telefono</InputLabel>
+                <OutlinedInput id="phone" type="text"
+                  {
+                    ...register("phones.0.number", {
+                      required: "Ingrese un numero de telefono"
+                    })
+                  }
+                />
+              </Stack>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={ 1 }>
+              <Grid item spacing = { 4 }>
+                  <Stack spacing={1}>
+                    <InputLabel>Ciudad</InputLabel>
+                    <OutlinedInput id="city" type="text"
+                      {
+                        ...register("address.city", {
+                          required: "Por favor ingresa el nombre de la ciudad"
+                        })
+                      }
+                    />
+                    {
+                      touchedFields.address?.city && errors.address?.city &&
+                      <FormHelperText>
+                        {
+                          errors.address.city.message
+                        }
+                      </FormHelperText>
+                    }
+                  </Stack>
+              </Grid>
+
+              <Grid item xs={ 4 }>
+                <Stack spacing = { 1 }>
+                  <InputLabel>Calle</InputLabel>
+                  <OutlinedInput id="street" type="text"
+                    {
+                      ...register("address.street", {
+                        required: "Por favor ingresa el nombre de la calle"
+                      })
+                    }
+                  />
+                  {
+                    touchedFields.address?.street && errors.address?.street &&
+                    <FormHelperText>
+                      {
+                        errors.address.street.message
+                      }
+                    </FormHelperText>
+                  }
+                </Stack>
+              </Grid>
+
+              <Grid item xs={ 4 }>
+                <Stack spacing={ 1 }>
+                  <InputLabel> Codigo Postal </InputLabel>
+                  <OutlinedInput
+                    id="zip" type="text"
+                    {
+                      ...register("address.zip", {
+                        required: "Por favor ingresa un codigo postal"
+                      })
+                    }
+                  />
+                  {
+                    touchedFields.address?.zip && errors.address?.zip &&
+                    <FormHelperText>
+                      {
+                        errors.address.zip.message
+                      }
+                    </FormHelperText>
+                  }
+                </Stack>
+
+              </Grid>
 
           </Grid>
 

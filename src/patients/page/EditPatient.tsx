@@ -17,13 +17,8 @@ import { usePatientStore } from "../hooks/usePatientStore";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { parse } from "date-fns";
+import { IEditPatient } from "../patients";
 
-interface IEditPatient {
-  name: string
-  fatherLastname: string
-  motherLastname: string
-  birthday: Date
-};
 export const EditPatient = ()=>{
   const navigate = useNavigate();
   const { id='0' } = useParams();
@@ -104,20 +99,20 @@ export const EditPatient = ()=>{
             <Grid item xs={ 4 }>
               <Stack spacing={ 1 }>
                 <InputLabel> Apellido paterno </InputLabel>
-                <OutlinedInput id="fatherLastname"
+                <OutlinedInput id="fatherLastName"
                   type="text"
                   {
-                    ...register("fatherLastname", {
+                    ...register("fatherLastName", {
                       required: "Debe ingresar un apellido."
                     })
                   }
                 />
                 {
-                  touchedFields.fatherLastname &&
-                  errors.fatherLastname &&
+                  touchedFields.fatherLastName &&
+                  errors.fatherLastName &&
                   <FormHelperText error >
                     {
-                      errors.fatherLastname.message
+                      errors.fatherLastName.message
                     }
                   </FormHelperText>
                 }
@@ -129,17 +124,17 @@ export const EditPatient = ()=>{
                 <OutlinedInput id="mother_lastname"
                   type="text"
                   {
-                    ...register("motherLastname", {
+                    ...register("motherLastName", {
                       required: "Debe ingresar un apellido.",
                     })
                   }
                 />
                 {
-                  touchedFields.motherLastname &&
-                  errors.motherLastname &&
+                  touchedFields.motherLastName &&
+                  errors.motherLastName &&
                   <FormHelperText error >
                     {
-                      errors.motherLastname.message
+                      errors.motherLastName.message
                     }
                   </FormHelperText>
                 }

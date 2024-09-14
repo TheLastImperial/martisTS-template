@@ -39,7 +39,9 @@ export const Patients = () => {
   const handleOnConfirm = () => {
     startDeletingPatient(idDelete);
     startGetPatients();
+    setOpen(false);
     setIdDelete("");
+    startGetPatients();
   };
 
   return (

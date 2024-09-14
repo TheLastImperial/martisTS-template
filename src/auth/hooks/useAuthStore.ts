@@ -28,8 +28,7 @@ export const useAuthStore = () => {
 
   const startRecoveryPassword = async (email: IEmail) => {
     try {
-      const resp = await Api.post('/auth/recovery-password', email);
-      console.log(resp)
+      await Api.post('/auth/recovery-password', email);
     } catch(error){
       console.log(error)
     }
@@ -37,11 +36,10 @@ export const useAuthStore = () => {
 
   const startNewPassword = async (newPassword: INewPassword, token:string) => {
     try {
-      const { data } = await Api.post("/auth/new-password", {
+      await Api.post("/auth/new-password", {
         ...newPassword,
         token,
       });
-      console.log(data);
     }catch(error) {
       console.log(error)
     }
@@ -50,7 +48,6 @@ export const useAuthStore = () => {
   const startCheckEmailExists = async (email: string) =>{
     try {
       const { data } = await Api.post( '/auth/email-exists', { email } );
-      console.log(data.exists);
       dispatch(onSetEmailExists(data.exists));
     } catch(error) {
       console.log(error);
@@ -79,7 +76,6 @@ export const useAuthStore = () => {
   }
 
   const startLogin = async({ user, rememberUser }: IStartLoginProps)=>{
-    console.log(user)
     try {
       const { data } = await Api.post('/auth/login', user);
       localStorage.setItem('token', data.token);

@@ -50,7 +50,6 @@ export const SearchDialog = ({ open, setOpen }: SearchDialogProps) => {
     }
     if (event.key == 'ArrowUp') {
       // up arrow
-      console.log('UP')
       if(index > 0)
         setIndex(index-1)
     } else if (event.key == 'ArrowDown') {

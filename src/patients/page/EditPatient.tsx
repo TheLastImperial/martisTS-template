@@ -43,8 +43,6 @@ export const EditPatient = ()=>{
   const onSubmit: SubmitHandler<IEditPatient> = (data) => {
     if(!isValid)
       return;
-    console.log('Actualizar paciente')
-    console.log(data)
     startUpdatingPatient(+id, data);
     // Se deberian usar las opciones del menu...
     navigate("/patients");
@@ -156,7 +154,6 @@ export const EditPatient = ()=>{
                         value={value}
                         inputRef={ref}
                         onChange={(date) => {
-                          console.log(date)
                           onChange(date);
                         }}
                         maxDate={ new Date() }

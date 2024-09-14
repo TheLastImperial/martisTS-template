@@ -1,6 +1,8 @@
 import Api from "src/api/Api";
 import { useAppDispatch, useAppSelector } from "src/store";
-import { onSetCurrentPatient, onSetPatients } from "../store/patientsSlice";
+import {
+  onSetCurrentPatient, onSetNewPatient, onSetPatients
+} from "../store/patientsSlice";
 import { INewPatient } from "../patients";
 
 export const usePatientStore = ()=>{
@@ -21,7 +23,6 @@ export const usePatientStore = ()=>{
       size: limit, page: offset, q
     };
     const { data } = await Api.get('/patients', { params });
-    console.log(data);
     dispatch(onSetPatients({
       patients: data.content,
       count: data.totalElements
@@ -31,7 +32,7 @@ export const usePatientStore = ()=>{
   const startSavingPatient = async ( patient : INewPatient)=> {
     try{
       const resp = await Api.post("/patients", patient);
-      console.log(resp);
+      onSetNewPatient(resp);
     }catch(e){
       console.log(e)
     }
@@ -57,7 +58,7 @@ export const usePatientStore = ()=>{
   const startUpdatingPatient = async (id: number,patient: INewPatient) => {
     try{
       const { data } = await Api.patch(`/patients/${id}`, patient);
-      console.log(data)
+      onSetCurrentPatient(data);
     }catch(e){
       console.log(e);
     }

@@ -36,7 +36,6 @@ export const NewPatient = ()=>{
   const onSubmit: SubmitHandler<INewPatient> = (data) => {
     if(!isValid)
       return;
-    console.log(data);
     startSavingPatient(data);
     // Se deberian usar las opciones del menu...
     navigate("/patients");
@@ -130,7 +129,6 @@ export const NewPatient = ()=>{
                         value={value}
                         inputRef={ref}
                         onChange={(date) => {
-                          console.log(date)
                           onChange(date);
                         }}
                         maxDate={ new Date() }

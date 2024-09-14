@@ -78,7 +78,6 @@ export const RegisterForm = ()=>{
       value: pwdStr.id * 25,
       color,
     });
-    console.log(pwdStrength);
   }
   const handleClickShowPasswordConfirm = ()=> {
     setShowPasswordConfirm(!showPasswordConfirm);
@@ -89,7 +88,6 @@ export const RegisterForm = ()=>{
   };
 
   const onSubmit = (data: INewUser) =>{
-    console.log(data);
     startRegister(data);
   }
 

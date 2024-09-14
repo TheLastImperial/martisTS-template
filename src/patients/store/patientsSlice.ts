@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PatientStore } from "../patients";
 
-
-
 const initialState: PatientStore = {
   patients: [],
   currentPatient: null,
@@ -20,8 +18,13 @@ export const patientsSlice = createSlice({
 
     onSetCurrentPatient: (state, { payload }) => {
       state.currentPatient = payload;
+    },
+    onSetNewPatient: (state, { payload })=>{
+      state.patients.push(payload);
     }
   }
 });
 
-export const { onSetPatients, onSetCurrentPatient } = patientsSlice.actions;
+export const {
+  onSetPatients, onSetCurrentPatient, onSetNewPatient
+} = patientsSlice.actions;

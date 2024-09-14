@@ -29,7 +29,7 @@ export const usePrescriptionStore = ()=> {
     prescription: INewPrescription & IPrescriptionForm) =>{
     try{
       const { data } = await Api.post('/prescriptions', prescription);
-      console.log(data);
+      dispatch(onSetPrescriptions(data));
     }catch(e){
       console.log(e)
     }

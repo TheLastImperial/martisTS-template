@@ -61,6 +61,15 @@ export const useAuthStore = () => {
   const startRegister = async (user: INewUser) => {
     try{
       const { data } = await Api.post('/auth/register', user);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('rememberUser', 'yes');
+      dispatch(
+        onLogin({
+          name: user.name,
+          email: user.email,
+          uid: '',
+        })
+      );
       console.log(data);
     }catch(error){
       // @ts-ignore

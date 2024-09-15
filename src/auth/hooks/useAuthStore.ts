@@ -24,6 +24,7 @@ export const useAuthStore = () => {
   const {
     status, msg, emailExists,
     pwdStrength,
+    user,
   } = useAppSelector((state) => state.auth);
 
   const startRecoveryPassword = async (email: IEmail) => {
@@ -81,10 +82,13 @@ export const useAuthStore = () => {
       localStorage.setItem('token', data.token);
       if(rememberUser)
         localStorage.setItem('rememberUser', 'yes');
+
+      const userData = JSON.parse(atob(data.token.split('.')[1]))
+      console.log(userData);
       dispatch(
         onLogin({
-          name: data.name,
-          email: data.email,
+          name: userData.name,
+          email: userData.email,
           uid: data.uid,
         })
       );
@@ -136,6 +140,7 @@ export const useAuthStore = () => {
   }
 
   return {
+    user,
     status,
     msg,
     emailExists,

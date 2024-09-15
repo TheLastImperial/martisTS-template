@@ -28,7 +28,7 @@ import { useAuthStore } from 'src/auth';
 
 const Profile = () => {
   const theme = useTheme();
-  const { startLogout } = useAuthStore();
+  const { startLogout, user } = useAuthStore();
 
   const handleLogout = () => {
     startLogout();
@@ -72,7 +72,9 @@ const Profile = () => {
           <Avatar alt="profile user"
             src={avatar1}
             sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">John Doe</Typography>
+          <Typography variant="subtitle1">
+            { user?.name }
+          </Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -121,10 +123,12 @@ const Profile = () => {
                               src={avatar1}
                               sx={{ width: 32, height: 32 }} />
                             <Stack>
-                              <Typography variant="h6">John Doe</Typography>
+                              <Typography variant="h6">
+                                { user?.name }
+                              </Typography>
                               <Typography variant="body2"
                                 color="textSecondary">
-                                UI/UX Designer
+                                Usuario de sistema
                               </Typography>
                             </Stack>
                           </Stack>

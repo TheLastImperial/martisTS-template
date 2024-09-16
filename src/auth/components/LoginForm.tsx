@@ -40,8 +40,8 @@ export const LoginForm = () => {
     },
   } = useForm<IUserLogin>({
       defaultValues: {
-        email: "correo@correo.com",
-        password: "123456",
+        email: "admin@admin.com",
+        password: "admin",
       }
     });
 

@@ -31,8 +31,8 @@ export const usePatientStore = ()=>{
 
   const startSavingPatient = async ( patient : INewPatient)=> {
     try{
-      const resp = await Api.post("/patients", patient);
-      onSetNewPatient(resp);
+      const { data } = await Api.post("/patients", patient);
+      onSetNewPatient(data);
     }catch(e){
       console.log(e)
     }

@@ -25,17 +25,28 @@ export const Logo = () => {
      */
     <>
     <Box sx={{ width: "85px"}}>
-      <svg version="1.1" viewBox="0.0 0.0 161.24146981627297 132.91601049868765" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10"  xmlns="http://www.w3.org/2000/svg">
+      <svg version="1.1"
+        viewBox="0.0 0.0 161.24146981627297 132.91601049868765"
+        fill="none" stroke="none"
+        strokeLinecap="square"
+        strokeMiterlimit="10"  xmlns="http://www.w3.org/2000/svg">
         <clipPath id="p.0">
-          <path d="m0 0l161.24147 0l0 132.91602l-161.24147 0l0 -132.91602z" clip-rule="nonzero"/>
+          <path d="m0 0l161.24147 0l0 132.91602l-161.24147 0l0 -132.91602z"
+            clipRule="nonzero"/>
         </clipPath>
-          <g clip-path="url(#p.0)">
+          <g clipPath="url(#p.0)">
             <path fill={theme.palette.primary.main}
-              fill-opacity="0.0" d="m0 0l161.24147 0l0 132.91602l-161.24147 0z" fill-rule="evenodd"/>
+              fillOpacity="0.0" d="m0 0l161.24147 0l0 132.91602l-161.24147 0z"
+              fillRule="evenodd"
+              />
             <path fill={theme.palette.primary.main}
-              fill-opacity="0.0" d="m0 0l161.29134 0l0 132.50394l-161.29134 0z" fill-rule="evenodd"/>
+              fillOpacity="0.0" d="m0 0l161.29134 0l0 132.50394l-161.29134 0z"
+              fillRule="evenodd"
+              />
             <path fill={theme.palette.primary.main}
-              d="m33.203125 98.6l0 -58.921875l-22.015625 0l0 -7.890625l52.953125 0l0 7.890625l-22.109375 0l0 58.921875l-8.828125 0zm39.633545 0l0 -66.8125l8.84375 0l0 58.921875l32.90625 0l0 7.890625l-41.75 0zm53.779663 0l0 -66.8125l8.84375 0l0 66.8125l-8.84375 0z" fill-rule="nonzero"/>
+              d="m33.203125 98.6l0 -58.921875l-22.015625 0l0 -7.890625l52.953125 0l0 7.890625l-22.109375 0l0 58.921875l-8.828125 0zm39.633545 0l0 -66.8125l8.84375 0l0 58.921875l32.90625 0l0 7.890625l-41.75 0zm53.779663 0l0 -66.8125l8.84375 0l0 66.8125l-8.84375 0z"
+              fillRule="nonzero"
+            />
           </g>
       </svg>
     </Box>

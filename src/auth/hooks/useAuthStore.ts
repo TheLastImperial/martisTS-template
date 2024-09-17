@@ -84,7 +84,6 @@ export const useAuthStore = () => {
         localStorage.setItem('rememberUser', 'yes');
 
       const userData = JSON.parse(atob(data.token.split('.')[1]))
-      console.log(userData);
       dispatch(
         onLogin({
           name: userData.name,

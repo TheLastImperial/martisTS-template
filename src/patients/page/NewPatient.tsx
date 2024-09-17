@@ -147,7 +147,7 @@ export const NewPatient = ()=>{
                 }
               </Stack>
             </Grid>
-            <Grid item spacing={ 1 }>
+            <Grid item >
               <Stack spacing={ 1 }>
                 <InputLabel>Telefono</InputLabel>
                 <OutlinedInput id="phone" type="text"
@@ -162,7 +162,7 @@ export const NewPatient = ()=>{
           </Grid>
 
           <Grid container spacing={ 1 }>
-              <Grid item spacing = { 4 }>
+              <Grid item>
                   <Stack spacing={1}>
                     <InputLabel>Ciudad</InputLabel>
                     <OutlinedInput id="city" type="text"
